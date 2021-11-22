@@ -2,7 +2,7 @@ package com.hero.instadog.di
 
 import dagger.Module
 
-@Module
+@Module(includes = [ViewModelModule::class])
 class AppModule {
 
 }

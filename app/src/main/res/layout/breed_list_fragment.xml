@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="com.hero.instadog.ui.breedList.repository.model.Breed" />
+
+        <import type="java.util.List" />
+
+        <import type="com.hero.instadog.ui.breedList.repository.model.Resource" />
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <variable
+            name="breeds"
+            type="LiveData&lt;Resource&lt;List&lt;Breed>>>" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_breed_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/breed_item" />
+
+</layout>
