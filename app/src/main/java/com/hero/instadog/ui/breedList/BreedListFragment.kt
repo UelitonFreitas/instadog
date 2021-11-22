@@ -55,7 +55,9 @@ class BreedListFragment : Fragment(), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
+
         initRecyclerView()
+
         val breedsListAdapter = BreedListAdapter(
             dataBindingComponent = dataBindingComponent,
             appExecutors = appExecutors
