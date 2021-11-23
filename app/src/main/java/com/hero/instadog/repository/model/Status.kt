@@ -1,4 +1,4 @@
-package com.hero.instadog.ui.breedList.repository.model
+package com.hero.instadog.repository.model
 
 enum class Status {
     SUCCESS,

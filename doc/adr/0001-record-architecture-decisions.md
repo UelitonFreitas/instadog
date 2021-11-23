@@ -4,7 +4,7 @@ Date: 2021-11-21
 
 ## Status
 
-Accepted
+Superceded by [2. Implement Breed List Freature](0002-implement-breed-list-freature.md)
 
 ## Context
 

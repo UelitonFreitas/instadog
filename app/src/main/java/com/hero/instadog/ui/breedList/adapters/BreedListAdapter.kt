@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.hero.instadog.R
 import com.hero.instadog.databinding.BreedItemBinding
 import com.hero.instadog.executors.AppExecutors
-import com.hero.instadog.ui.breedList.repository.model.Breed
+import com.hero.instadog.repository.model.Breed
 
 class BreedListAdapter (
     private val dataBindingComponent: DataBindingComponent,

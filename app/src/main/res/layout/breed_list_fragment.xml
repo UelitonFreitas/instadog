@@ -6,11 +6,11 @@
 
     <data>
 
-        <import type="com.hero.instadog.ui.breedList.repository.model.Breed" />
+        <import type="com.hero.instadog.repository.model.Breed" />
 
         <import type="java.util.List" />
 
-        <import type="com.hero.instadog.ui.breedList.repository.model.Resource" />
+        <import type="com.hero.instadog.repository.model.Resource" />
 
         <import type="androidx.lifecycle.LiveData" />
 

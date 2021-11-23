@@ -11,7 +11,7 @@
 
         <variable
             name="breed"
-            type="com.hero.instadog.ui.breedList.repository.model.Breed" />
+            type="com.hero.instadog.repository.model.Breed" />
     </data>
 
 

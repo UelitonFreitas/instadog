@@ -1,4 +1,4 @@
-package com.hero.instadog.ui.breedList.repository.model
+package com.hero.instadog.repository.model
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {
