@@ -3,6 +3,7 @@ package com.hero.instadog.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.hero.instadog.api.BreedsService
+import com.hero.instadog.api.model.Root
 import com.hero.instadog.database.dao.BreedDao
 import com.hero.instadog.executors.AppExecutors
 import com.hero.instadog.repository.model.Breed
@@ -19,14 +20,11 @@ class BreedsRepository @Inject constructor(
 
     fun loadBreeds(): LiveData<Resource<List<Breed>>> {
         return object :
-            NetworkBoundResource<List<Breed>, List<com.hero.instadog.api.model.Breed>>(appExecutors) {
-            override fun saveCallResult(item: List<com.hero.instadog.api.model.Breed>) {
-                breedDao.insertBreeds(item.map {
-                    com.hero.instadog.database.model.Breed(
-                        it.name,
-                        it.imageUrl
-                    )
-                })
+            NetworkBoundResource<List<Breed>, Root>(appExecutors) {
+            override fun saveCallResult(item: Root) {
+                breedDao.insertBreeds(
+                    item.message.keys.map { key -> com.hero.instadog.database.model.Breed(key, "https://images.dog.ceo/breeds/airedale/n02096051_1206.jpg") }
+                )
             }
 
             override fun shouldFetch(data: List<Breed>?): Boolean {
