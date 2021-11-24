@@ -1,15 +1,15 @@
 package com.hero.instadog.ui.breedList
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hero.instadog.repository.model.Breed
+import com.hero.instadog.testing.OpenForTesting
 import com.hero.instadog.repository.BreedsRepository
+import com.hero.instadog.repository.model.Breed
 import com.hero.instadog.repository.model.Resource
-import com.hero.instadog.repository.model.Status
 import javax.inject.Inject
 
-class BreedListViewModel @Inject constructor(private val breedsRepository: BreedsRepository) : ViewModel() {
+@OpenForTesting
+class BreedListViewModel @Inject constructor(breedsRepository: BreedsRepository) : ViewModel() {
 
     val breeds: LiveData<Resource<List<Breed>>> = breedsRepository.loadBreeds()
 
