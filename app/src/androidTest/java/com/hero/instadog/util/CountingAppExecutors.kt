@@ -16,7 +16,7 @@
 
 package com.hero.instadog.util
 
-import com.android.example.executor.AppExecutors
+import com.hero.instadog.executors.AppExecutors
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
