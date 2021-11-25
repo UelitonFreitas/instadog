@@ -49,6 +49,12 @@ class BreedListFragment : Fragment(), Injectable {
             dataBindingComponent
         )
 
+        binding.retryCallback = object : RetryButtonCallback {
+            override fun retry() {
+                breedsViewModel.retry()
+            }
+        }
+
         return binding.root
     }
 
@@ -75,6 +81,10 @@ class BreedListFragment : Fragment(), Injectable {
         breedsViewModel.breeds.observe(viewLifecycleOwner, Observer { result ->
             adapter.submitList(result?.data)
         })
+    }
+
+    interface RetryButtonCallback {
+        fun retry()
     }
 }
 

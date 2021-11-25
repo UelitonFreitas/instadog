@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -129,6 +130,44 @@ class BreedsListFragmentTest {
         breedsLiveData.postValue(null)
 
         Espresso.onView(listMatcher().atPosition(0)).check(ViewAssertions.doesNotExist())
+    }
+
+    @Test
+    fun shouldShowErrorMessageWhenThereWoreErrorsForFetchBreeds() {
+
+        val errorMessage = "foo"
+
+        breedsLiveData.postValue(Resource.error(errorMessage, null))
+
+        Espresso.onView(withId(R.id.progress_bar))
+            .check(ViewAssertions.matches(CoreMatchers.not(ViewMatchers.isDisplayed())))
+
+        Espresso.onView(withId(R.id.button_retry))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        Espresso.onView(withId(R.id.button_retry)).perform(ViewActions.click())
+
+        Mockito.verify(viewModel).retry()
+
+        breedsLiveData.postValue(Resource.loading(null))
+
+        Espresso.onView(withId(R.id.progress_bar))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        Espresso.onView(withId(R.id.button_retry))
+            .check(ViewAssertions.matches(CoreMatchers.not(ViewMatchers.isDisplayed())))
+
+        val breeds = TestUtil.createBreeds(3, breedName, breedImageUrl)
+        breedsLiveData.postValue(Resource.success(breeds))
+
+        Espresso.onView(withId(R.id.progress_bar))
+            .check(ViewAssertions.matches(CoreMatchers.not(ViewMatchers.isDisplayed())))
+
+        Espresso.onView(withId(R.id.button_retry))
+            .check(ViewAssertions.matches(CoreMatchers.not(ViewMatchers.isDisplayed())))
+
+        Espresso.onView(listMatcher().atPosition(0))
+            .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("${breedName}0"))))
     }
 
     private fun setBreeds(name: String, imageUrl: String) {
