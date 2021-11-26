@@ -7,7 +7,6 @@ import com.hero.instadog.repository.model.Breed
 import com.hero.instadog.repository.model.Resource
 import com.hero.instadog.ui.breedList.BreedListViewModel
 import com.hero.instadog.util.TestUtil.createBreed
-import com.hero.instadog.util.mock
 import junit.framework.Assert.assertEquals
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
