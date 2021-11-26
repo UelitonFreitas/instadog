@@ -13,7 +13,7 @@ data class Breed(
     val imageUrl: String?
 )
 
-data class Root(
+data class ApiResponseData(
 
     @SerializedName("message")
     val message: Map<String, List<String>>,

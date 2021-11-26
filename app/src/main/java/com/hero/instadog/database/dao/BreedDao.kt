@@ -16,5 +16,5 @@ interface BreedDao {
     fun insertBreeds(repositories: List<Breed>)
 
     @Query("SELECT * FROM breed")
-    abstract fun load(): LiveData<List<Breed>>
+    fun load(): LiveData<List<Breed>>
 }
