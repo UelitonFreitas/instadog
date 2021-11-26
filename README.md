@@ -11,3 +11,12 @@
 
 ### Architecture Decision Records (ADRs).
 - Was used ADR tool to handle architectural decisions. It is possible to check the documentation and tools [here](https://github.com/npryce/adr-tools).
+
+### How to test
+#### UI/Integration tests
+
+To run UI/Integration run the follow command with a running emulator:
+
+```bash
+./gradlew connectedAndroidTest
+```
