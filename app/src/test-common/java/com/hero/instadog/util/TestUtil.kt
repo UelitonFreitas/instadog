@@ -22,8 +22,7 @@ import com.hero.instadog.repository.model.Breed
 object TestUtil {
 
     fun createBreed(name: String, image: String) = Breed(
-        name = name,
-        imageUrl = image
+        name = name
     )
 
     fun createBreeds(count: Int, name: String, imageUrl: String): List<Breed> {

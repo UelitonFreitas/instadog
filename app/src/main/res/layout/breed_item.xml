@@ -24,28 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imageView"
-                app:imageUrl="@{breed.imageUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/btn_star"
-                android:layout_width="@dimen/photo_size"
-                android:layout_height="@dimen/photo_size"
-                android:layout_marginStart="@dimen/default_margin"
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="false"
-                android:contentDescription="@string/breed_descriptor"
-                android:cropToPadding="false"
-                android:scaleType="centerCrop" />
-
             <TextView
                 android:id="@+id/text_view_breed_name"
                 android:text="@{breed.name}"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Chiauau"
                 android:layout_width="wrap_content"

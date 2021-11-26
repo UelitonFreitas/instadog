@@ -41,7 +41,7 @@ class BreedsRepository @Inject constructor(
             }
 
             override fun loadFromDb() =
-                breedDao.load().map { breed -> breed.map { Breed(it.name, it.imageUrl) } }
+                breedDao.load().map { breed -> breed.map { Breed(it.name) } }
 
             override fun createCall() = breedsService.getBreeds()
         }.asLiveData()

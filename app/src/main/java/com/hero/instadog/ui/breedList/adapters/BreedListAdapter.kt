@@ -22,7 +22,7 @@ class BreedListAdapter (
         }
 
         override fun areContentsTheSame(oldItem: Breed, newItem: Breed): Boolean {
-            return oldItem.name == newItem.name && oldItem.imageUrl == newItem.imageUrl
+            return oldItem.name == newItem.name
         }
     }
 ) {
