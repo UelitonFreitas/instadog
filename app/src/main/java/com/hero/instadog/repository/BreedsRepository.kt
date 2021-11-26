@@ -3,7 +3,6 @@ package com.hero.instadog.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.hero.instadog.api.BreedsService
-import com.hero.instadog.database.BreedsDatabase
 import com.hero.instadog.database.dao.BreedDao
 import com.hero.instadog.executors.AppExecutors
 import com.hero.instadog.repository.model.Breed
