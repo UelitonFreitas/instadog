@@ -13,6 +13,9 @@
 - Was used ADR tool to handle architectural decisions. It is possible to check the documentation and tools [here](https://github.com/npryce/adr-tools).
 
 ### How to test
+
+ It is possible to check CI status [here](https://github.com/UelitonFreitas/instadog/actions).
+
 #### UI/Integration tests
 
 To run UI/Integration run the follow command with a running emulator:
