@@ -13,25 +13,13 @@ import javax.inject.Inject
 @OpenForTesting
 class BreedListViewModel @Inject constructor(breedsRepository: BreedsRepository) : ViewModel() {
 
-    private val shouldRetry = MutableLiveData(Unit)
+    private val _loadBreeds = MutableLiveData<Unit>()
 
-    val breeds: LiveData<Resource<List<Breed>>> = shouldRetry.switchMap {
+    val breeds: LiveData<Resource<List<Breed>>> = _loadBreeds.switchMap {
         breedsRepository.loadBreeds()
     }
 
-    fun retry() {
-        shouldRetry.value = Unit
-    }
-
-    class AbsentLiveData<T : Any?> private constructor() : LiveData<T>() {
-        init {
-            postValue(null)
-        }
-
-        companion object {
-            fun <T> create(): LiveData<T> {
-                return AbsentLiveData()
-            }
-        }
+    fun loadBreeds() {
+        _loadBreeds.value = Unit
     }
 }

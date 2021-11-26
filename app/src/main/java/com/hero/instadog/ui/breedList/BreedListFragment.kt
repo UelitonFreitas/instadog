@@ -51,7 +51,7 @@ class BreedListFragment : Fragment(), Injectable {
 
         binding.retryCallback = object : RetryButtonCallback {
             override fun retry() {
-                breedsViewModel.retry()
+                breedsViewModel.loadBreeds()
             }
         }
 
@@ -85,6 +85,11 @@ class BreedListFragment : Fragment(), Injectable {
 
     interface RetryButtonCallback {
         fun retry()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        breedsViewModel.loadBreeds()
     }
 }
 

@@ -26,6 +26,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.mockito.Mockito.times
 
 @RunWith(AndroidJUnit4::class)
 class BreedsListFragmentTest {
@@ -49,7 +50,6 @@ class BreedsListFragmentTest {
     private val navController = mock<NavController>()
 
     private val breedsLiveData = MutableLiveData<Resource<List<Breed>>>()
-
 
     private lateinit var viewModel: BreedListViewModel
 
@@ -147,7 +147,8 @@ class BreedsListFragmentTest {
 
         Espresso.onView(withId(R.id.button_retry)).perform(ViewActions.click())
 
-        Mockito.verify(viewModel).retry()
+        //On Resume and retry
+        Mockito.verify(viewModel, times(2)).loadBreeds()
 
         breedsLiveData.postValue(Resource.loading(null))
 
