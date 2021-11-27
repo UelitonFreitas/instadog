@@ -45,7 +45,7 @@ class BreedsRepositoryTest {
 
         val breeds = hashMapOf(breedName to listOf("shepherd"))
         val call = successCall(
-            com.hero.instadog.api.model.ApiResponseData(
+            com.hero.instadog.api.model.BreedListApiResponseData(
                 message = breeds,
                 status = "success"
             )

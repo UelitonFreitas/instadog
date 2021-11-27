@@ -2,6 +2,7 @@ package com.hero.instadog.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import com.hero.instadog.api.BreedsService
 import com.hero.instadog.database.dao.BreedDao
 import com.hero.instadog.executors.AppExecutors
@@ -21,15 +22,15 @@ class BreedsRepository @Inject constructor(
 
     fun loadBreeds(): LiveData<Resource<List<Breed>>> {
         return object :
-            NetworkBoundResource<List<Breed>, com.hero.instadog.api.model.ApiResponseData>(
+            NetworkBoundResource<List<Breed>, com.hero.instadog.api.model.BreedListApiResponseData>(
                 appExecutors
             ) {
-            override fun saveCallResult(item: com.hero.instadog.api.model.ApiResponseData) {
+            override fun saveCallResult(item: com.hero.instadog.api.model.BreedListApiResponseData) {
                 breedDao.insertBreeds(
                     item.message.keys.map { key ->
                         com.hero.instadog.database.model.Breed(
                             key,
-                            "https://images.dog.ceo/breeds/airedale/n02096051_1206.jpg"
+                            null
                         )
                     }
                 )
@@ -40,9 +41,41 @@ class BreedsRepository @Inject constructor(
             }
 
             override fun loadFromDb() =
-                breedDao.load().map { breed -> breed.map { Breed(it.name) } }
+                breedDao.load().map { breed -> breed.map { Breed(it.name, it.imageUrl) } }
 
             override fun createCall() = breedsService.getBreeds()
+        }.asLiveData()
+    }
+
+    fun loadBreed(name: String): LiveData<Resource<Breed>> {
+        return breedDao.loadBreed(name)
+            .switchMap { breed -> loadBreedImage(breedName = breed.name) }
+    }
+
+    fun loadBreedImage(breedName: String): LiveData<Resource<Breed>> {
+        return object :
+            NetworkBoundResource<Breed, com.hero.instadog.api.model.RandomBreedImageApiResponse>(
+                appExecutors
+            ) {
+            override fun saveCallResult(item: com.hero.instadog.api.model.RandomBreedImageApiResponse) {
+                breedDao.insert(
+                    item.message.run {
+                        com.hero.instadog.database.model.Breed(
+                            breedName,
+                            this
+                        )
+                    }
+                )
+            }
+
+            override fun shouldFetch(data: Breed?): Boolean {
+                return data?.imageUrl == null
+            }
+
+            override fun loadFromDb() =
+                breedDao.loadBreed(breedName).map { Breed(it.name, it.imageUrl) }
+
+            override fun createCall() = breedsService.getBreedImage(breedName)
         }.asLiveData()
     }
 }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 

@@ -17,4 +17,7 @@ interface BreedDao {
 
     @Query("SELECT * FROM breed")
     fun load(): LiveData<List<Breed>>
+
+    @Query("SELECT * FROM breed WHERE name = :name")
+    fun loadBreed(name: String): LiveData<Breed>
 }
