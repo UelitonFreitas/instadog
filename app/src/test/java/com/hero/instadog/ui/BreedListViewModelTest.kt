@@ -57,7 +57,7 @@ class BreedListViewModelTest {
 
         breedsViewModel.loadBreeds()
 
-        val data = Resource.success(listOf(createBreed("a", "a")))
+        val data = Resource.success(listOf(createBreed("a")))
 
         val breedsLiveData = MutableLiveData<Resource<List<Breed>>>(data)
         `when`(breedsRepository.loadBreeds()).thenReturn(breedsLiveData)

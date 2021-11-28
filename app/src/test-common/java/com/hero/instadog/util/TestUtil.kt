@@ -21,15 +21,14 @@ import com.hero.instadog.repository.model.Breed
 
 object TestUtil {
 
-    fun createBreed(name: String, image: String) = Breed(
+    fun createBreed(name: String) = Breed(
         name = name
     )
 
-    fun createBreeds(count: Int, name: String, imageUrl: String): List<Breed> {
+    fun createBreeds(count: Int, name: String): List<Breed> {
         return (0 until count).map {
             createBreed(
-                name = name + it,
-                image = imageUrl + it
+                name = name + it
             )
         }
     }

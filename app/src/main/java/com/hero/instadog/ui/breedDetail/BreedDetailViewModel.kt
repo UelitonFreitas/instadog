@@ -10,7 +10,7 @@ class BreedDetailViewModel @Inject constructor(breedsRepository: BreedsRepositor
 
     private val _breedName = MutableLiveData<String>()
 
-    val breedFromRepo = _breedName.switchMap { breedName ->
+    val breeds = _breedName.switchMap { breedName ->
         breedsRepository.loadBreed(breedName)
     }
 

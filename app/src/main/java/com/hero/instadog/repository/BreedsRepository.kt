@@ -5,9 +5,11 @@ import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import com.hero.instadog.api.BreedsService
 import com.hero.instadog.database.dao.BreedDao
+import com.hero.instadog.database.model.BreedWithSubBreeds
 import com.hero.instadog.executors.AppExecutors
 import com.hero.instadog.repository.model.Breed
 import com.hero.instadog.repository.model.Resource
+import com.hero.instadog.repository.model.SubBreed
 import com.hero.instadog.testing.OpenForTesting
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -34,6 +36,21 @@ class BreedsRepository @Inject constructor(
                         )
                     }
                 )
+
+                item.message.keys.map { breedName ->
+                    val subBreeds = item.message[breedName]?.map { subBreedName ->
+                        com.hero.instadog.database.model.SubBreed(
+                            subBreedName,
+                            null,
+                            breedName = breedName
+                        )
+                    }
+
+                    subBreeds?.let {
+                        breedDao.insertSubBreeds(it)
+                    }
+
+                }
             }
 
             override fun shouldFetch(data: List<Breed>?): Boolean {
@@ -48,11 +65,11 @@ class BreedsRepository @Inject constructor(
     }
 
     fun loadBreed(name: String): LiveData<Resource<Breed>> {
-        return breedDao.loadBreed(name)
-            .switchMap { breed -> loadBreedImage(breedName = breed.name) }
+        return breedDao.getBreedWithSubBreeds(name)
+            .switchMap { breedWithSubBreed -> loadBreedImage(breedWithSubBreed) }
     }
 
-    fun loadBreedImage(breedName: String): LiveData<Resource<Breed>> {
+    fun loadBreedImage(breedWithSubBreed: BreedWithSubBreeds): LiveData<Resource<Breed>> {
         return object :
             NetworkBoundResource<Breed, com.hero.instadog.api.model.RandomBreedImageApiResponse>(
                 appExecutors
@@ -61,7 +78,7 @@ class BreedsRepository @Inject constructor(
                 breedDao.insert(
                     item.message.run {
                         com.hero.instadog.database.model.Breed(
-                            breedName,
+                            breedWithSubBreed.breed.name,
                             this
                         )
                     }
@@ -73,9 +90,9 @@ class BreedsRepository @Inject constructor(
             }
 
             override fun loadFromDb() =
-                breedDao.loadBreed(breedName).map { Breed(it.name, it.imageUrl) }
+                breedDao.loadBreed(breedWithSubBreed.breed.name).map { it -> Breed(it.name, it.imageUrl, breedWithSubBreed.subBreeds.map { SubBreed(it.name) }) }
 
-            override fun createCall() = breedsService.getBreedImage(breedName)
+            override fun createCall() = breedsService.getBreedImage(breedWithSubBreed.breed.name)
         }.asLiveData()
     }
 }
