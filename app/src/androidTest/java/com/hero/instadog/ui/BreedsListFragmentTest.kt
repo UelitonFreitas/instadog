@@ -58,7 +58,6 @@ class BreedsListFragmentTest {
     private val repoFragment = BreedListFragment()
 
     private val breedName = "Chiauaua"
-    private val breedImageUrl = "Image"
 
     @Before
     fun init() {
@@ -98,7 +97,7 @@ class BreedsListFragmentTest {
 
     @Test
     fun shouldShowActualBreedsWhenLoading() {
-        val breed = TestUtil.createBreed(breedName, breedImageUrl)
+        val breed = TestUtil.createBreed(breedName)
 
         breedsLiveData.postValue(Resource.loading(listOf(breed)))
 
@@ -111,7 +110,7 @@ class BreedsListFragmentTest {
 
     @Test
     fun shouldShowBreeds() {
-        setBreeds(breedName, breedImageUrl)
+        setBreeds(breedName)
 
         Espresso.onView(listMatcher().atPosition(0))
             .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("${breedName}0"))))
@@ -122,7 +121,7 @@ class BreedsListFragmentTest {
 
     @Test
     fun shouldNotShowBreedsWhenThereIsNotDara() {
-        setBreeds(breedName, breedImageUrl)
+        setBreeds(breedName)
 
         Espresso.onView(listMatcher().atPosition(0))
             .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("${breedName}0"))))
@@ -158,7 +157,7 @@ class BreedsListFragmentTest {
         Espresso.onView(withId(R.id.button_retry))
             .check(ViewAssertions.matches(CoreMatchers.not(ViewMatchers.isDisplayed())))
 
-        val breeds = TestUtil.createBreeds(3, breedName, breedImageUrl)
+        val breeds = TestUtil.createBreeds(3, breedName)
         breedsLiveData.postValue(Resource.success(breeds))
 
         Espresso.onView(withId(R.id.progress_bar))
@@ -171,8 +170,8 @@ class BreedsListFragmentTest {
             .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("${breedName}0"))))
     }
 
-    private fun setBreeds(name: String, imageUrl: String) {
-        val breeds = TestUtil.createBreeds(2, name, imageUrl)
+    private fun setBreeds(name: String) {
+        val breeds = TestUtil.createBreeds(2, name)
         breedsLiveData.postValue(Resource.loading(breeds))
     }
 

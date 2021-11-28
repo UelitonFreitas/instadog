@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hero.instadog.R
 import com.hero.instadog.binding.AutoClearedValue
 import com.hero.instadog.binding.FragmentDataBindingComponent
@@ -67,7 +68,11 @@ class BreedListFragment : Fragment(), Injectable {
         val breedsListAdapter = BreedListAdapter(
             dataBindingComponent = dataBindingComponent,
             appExecutors = appExecutors
-        ) { _ ->
+        ) { breed ->
+
+            findNavController().navigate(
+                BreedListFragmentDirections.breedDetail(breedName = breed.name)
+            )
 
         }
         binding.breeds = breedsViewModel.breeds

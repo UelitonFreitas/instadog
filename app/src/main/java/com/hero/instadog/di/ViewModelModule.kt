@@ -2,6 +2,7 @@ package com.hero.instadog.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.hero.instadog.ui.breedDetail.BreedDetailViewModel
 import com.hero.instadog.ui.breedList.BreedListViewModel
 import com.hero.instadog.viewmodel.BreedListViewModelFactory
 import dagger.Binds
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BreedListViewModel::class)
     abstract fun bindBreedListViewModel(breedListViewModel: BreedListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BreedDetailViewModel::class)
+    abstract fun bindBreedDetailViewModel(breedViewModel: BreedDetailViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: BreedListViewModelFactory): ViewModelProvider.Factory

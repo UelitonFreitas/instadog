@@ -37,7 +37,7 @@ class BreedsRepositoryTest {
     @Test
     fun shouldLoadRepoFromNetworkWithSuccess() {
         val breedName = "australian"
-        val expectedBreedToBeSaved = Breed(breedName, "https://images.dog.ceo/breeds/airedale/n02096051_1206.jpg")
+        val expectedBreedToBeSaved = Breed(breedName, null)
         val expectedBreedToBeShow = com.hero.instadog.repository.model.Breed(breedName)
 
         val dbData = MutableLiveData<List<Breed>>()
@@ -45,7 +45,7 @@ class BreedsRepositoryTest {
 
         val breeds = hashMapOf(breedName to listOf("shepherd"))
         val call = successCall(
-            com.hero.instadog.api.model.ApiResponseData(
+            com.hero.instadog.api.model.BreedListApiResponseData(
                 message = breeds,
                 status = "success"
             )
