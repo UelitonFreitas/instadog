@@ -15,8 +15,6 @@ class BreedListViewModel @Inject constructor(val breedsRepository: FlowBreedsRep
 
     private val _loadBreeds = MutableStateFlow(Unit)
 
-//    val breeds: LiveData<Resource<List<Breed>>> = MutableLiveData()
-
     fun loadBreeds() {
         _loadBreeds.value = Unit
     }
