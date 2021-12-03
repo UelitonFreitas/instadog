@@ -16,7 +16,7 @@
 
         <variable
             name="breeds"
-            type="LiveData&lt;Resource&lt;List&lt;Breed>>>" />
+            type="LiveData&lt;List&lt;Breed>>" />
 
         <variable
             name="retryCallback"
@@ -40,21 +40,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/breed_item" />
-
-        <include
-            layout="@layout/loading_state"
-            app:resource="@{(Resource) breeds}"
-            app:callback="@{() -> retryCallback.retry()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

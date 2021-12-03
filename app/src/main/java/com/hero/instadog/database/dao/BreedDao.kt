@@ -5,6 +5,7 @@ import androidx.room.*
 import com.hero.instadog.database.model.Breed
 import com.hero.instadog.database.model.BreedWithSubBreeds
 import com.hero.instadog.database.model.SubBreed
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BreedDao {
@@ -26,4 +27,7 @@ interface BreedDao {
     @Transaction
     @Query("SELECT * FROM breed WHERE name = :name")
     fun getBreedWithSubBreeds(name: String): LiveData<BreedWithSubBreeds>
+
+    @Query("SELECT * FROM breed")
+    fun getBreedsWithFlow(): Flow<List<Breed>>
 }
