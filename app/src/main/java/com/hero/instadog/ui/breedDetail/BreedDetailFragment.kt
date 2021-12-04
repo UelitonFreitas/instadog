@@ -55,8 +55,8 @@ class BreedDetailFragment : Fragment(), Injectable {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        breedDetailViewModel.loadBreed(params.breedName)
-        binding.breed = breedDetailViewModel.breeds
+//        breedDetailViewModel.loadBreed(params.breedName)
+//        binding.breed = breedDetailViewModel.breeds
 
         binding.lifecycleOwner = viewLifecycleOwner
     }

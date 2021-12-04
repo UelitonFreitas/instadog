@@ -84,7 +84,7 @@ class BreedListFragment : Fragment(), Injectable {
 
         binding.breeds = breedsViewModel.breeds
         breedsViewModel.breeds.observe(viewLifecycleOwner, Observer { result ->
-            adapter.submitList(result?.data)
+            adapter.submitList(result)
         })
     }
 

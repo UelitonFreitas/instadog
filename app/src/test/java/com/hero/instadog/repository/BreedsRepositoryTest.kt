@@ -3,7 +3,7 @@ package com.hero.instadog.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.hero.instadog.api.BreedsService
+import com.hero.instadog.api.retrofit.RetrofitBreedsService
 import com.hero.instadog.database.dao.BreedDao
 import com.hero.instadog.database.model.Breed
 import com.hero.instadog.repository.ApiUtil.successCall
@@ -23,7 +23,7 @@ class BreedsRepositoryTest {
     private lateinit var breedsRepository: BreedsRepository
 
     private val breedDao = Mockito.mock(BreedDao::class.java)
-    private val breedService = Mockito.mock(BreedsService::class.java)
+    private val breedService = Mockito.mock(RetrofitBreedsService::class.java)
 
     @Rule
     @JvmField
@@ -45,7 +45,7 @@ class BreedsRepositoryTest {
 
         val breeds = hashMapOf(breedName to listOf("shepherd"))
         val call = successCall(
-            com.hero.instadog.api.model.BreedListApiResponseData(
+            com.hero.instadog.api.retrofit.model.BreedListApiResponseData(
                 message = breeds,
                 status = "success"
             )
