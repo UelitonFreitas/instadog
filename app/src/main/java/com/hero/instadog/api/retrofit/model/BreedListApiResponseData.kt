@@ -1,4 +1,4 @@
-package com.hero.instadog.api.model
+package com.hero.instadog.api.retrofit.model
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName

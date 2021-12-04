@@ -6,15 +6,15 @@ import androidx.lifecycle.switchMap
 import com.hero.instadog.repository.BreedsRepository
 import javax.inject.Inject
 
-class BreedDetailViewModel @Inject constructor(breedsRepository: BreedsRepository) : ViewModel() {
+class BreedDetailViewModel @Inject constructor() : ViewModel() {
 
-    private val _breedName = MutableLiveData<String>()
-
-    val breeds = _breedName.switchMap { breedName ->
-        breedsRepository.loadBreed(breedName)
-    }
-
-    fun loadBreed(name: String) {
-        _breedName.value = name
-    }
+//    private val _breedName = MutableLiveData<String>()
+//
+//    val breeds = _breedName.switchMap { breedName ->
+//        breedsRepository.loadBreed(breedName)
+//    }
+//
+//    fun loadBreed(name: String) {
+//        _breedName.value = name
+//    }
 }

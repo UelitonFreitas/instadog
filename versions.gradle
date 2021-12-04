@@ -175,7 +175,6 @@ deps.robolectric = "org.robolectric:robolectric:$versions.robolectric"
 def room = [:]
 room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
-room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
 room.testing = "androidx.room:room-testing:$versions.room"
 room.roomktx = "androidx.room:room-ktx:$versions.room"
 deps.room = room
@@ -209,4 +208,5 @@ def addRepos(RepositoryHandler handler) {
     handler.jcenter()
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
+
 ext.addRepos = this.&addRepos
